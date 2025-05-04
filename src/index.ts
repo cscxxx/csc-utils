@@ -24,3 +24,23 @@ export async function fetchData<T>(url: string): Promise<T> {
   const response = await axios.get<T>(url);
   return response.data;
 }
+/**
+ * enum HttpStatus {
+ *   OK = 200,
+ *   NotFound = 404,
+ *   ServerError = 500,
+ * }
+ * 将枚举转换为 {value: 枚举名, label: 枚举值} 的数组
+ * @param enumObj 枚举对象
+ * @returns 转换后的数组
+ */
+export function enumToArray<T extends Record<string, string | number>>(
+  enumObj: T
+): Array<{ value: keyof T; label: T[keyof T] }> {
+  return Object.entries(enumObj)
+    .filter(([key]) => isNaN(Number(key))) // 过滤掉数字枚举的反向映射
+    .map(([key, value]) => ({
+      value: key as keyof T,
+      label: value as T[keyof T],
+    }));
+}
