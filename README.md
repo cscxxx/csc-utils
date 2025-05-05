@@ -17,6 +17,12 @@ A TypeScript utility library with commonly used tools and functions.
 npm install csc-utils
 ```
 
+## 本地调试 storybook
+
+```bash
+npm run storybook
+```
+
 ## Usage
 
 ```typescript
